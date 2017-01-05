@@ -8,6 +8,8 @@ body {
 	min-width:		1280px;
 	margin:			0 auto;
 }
+
+
 /* 共同组件 */
 	.clearfix::after {
 		content:		'';
