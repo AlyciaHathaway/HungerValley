@@ -1,0 +1,187 @@
+body {
+	font:		16px/1.4286 'Microsoft YaHei',sans-serif;
+	color:		#696969;
+	width:		1200px;
+	height:		100%;
+	margin:		0 auto;
+}
+
+* {
+	padding:	0;
+	margin:		0;
+}
+
+
+header {
+	width:		380px;
+	float:		left;
+	text-align:	center;
+	background:	#22c3aa;
+}
+
+header::after {
+	content:	'';
+	display:	block;
+	clear:		both;
+	overflow:	hidden;
+}
+
+header .avatar {
+			width:				165px;
+			height:				165px;
+			margin:				60px auto 20px;
+			border-radius:		50%;
+			background:			url(avatar.jpg) no-repeat top left;
+		}
+
+		.name {
+			width:				250px;
+			margin:				0 auto;
+		}
+
+		.name h1 {
+			font-size:			32px;
+			color:				#fff;
+			padding-bottom:		10px;
+		}
+
+		.name .intro {
+			font-weight:		bold;
+			font-size:			16px;
+			border-top:			2px solid #10826d;
+			border-bottom:		2px solid #10826d;
+			padding:			5px 0;
+			color:				#10826d;
+		}
+			.intro .light {
+				font-size:			15px;
+				font-weight:		normal;
+			}
+
+header .skill-tree {
+			width:				250px;
+			margin:				50px auto 10px;
+		}
+		.skill-tree .skill-box {
+			width:				160px;
+			margin:				10px auto;
+			border:				1px solid #fff;
+			border-radius:		20px;
+		}
+					.skill-box span {
+						display:		block;
+						width:			70%;
+						height:			100%;
+						padding:		5px 0 5px 6px;
+						border-radius:	20px;
+						text-align:		left;
+						line-height:	10px;
+						background:		#fff;
+					}
+
+header .contacts {
+			display:			inline-block;
+			text-align:			left;
+			margin:				430px auto 60px;
+			color:				#fff;
+		}
+		.contacts ul {
+			padding:			20px 0;
+			list-style:			none;
+		}
+		.contacts ul span {
+			margin-left:		15px;
+		}
+
+
+
+.layout {
+	margin-left:	380px;
+	padding:		30px;
+	background:		#F5F5F5;
+}
+
+
+
+.main h3 {
+	width:			360px;
+	padding:		10px 0;
+	border-bottom:	1px solid #ccc;
+	font-size:		24px;
+}
+		.description {
+			padding:			30px 0 30px 10px;
+			list-style:			none;
+		}
+		.description a {
+			color:				#22C3AA;
+			float:				right;
+		}
+		.description .outer-list {
+			padding-left:		50px;
+			padding-bottom:		30px;
+			border-left:		1px solid #ccc;
+		}
+		.description .outer-list::before {
+			content:			'';
+			width:				10px;
+			height:				10px;
+			background:			#696969;
+			border-radius:		50%;
+			position:			absolute;
+			margin-left:		-55px;
+		}
+
+				.description .title {
+					line-height:		1;
+					padding-bottom:		10px;
+					font-size:			18px;
+					color:				#22C3AA;
+				}
+				.description .title span {
+					display:			inline-block;
+					float:				right;
+					margin-top:			-10px;
+					padding:			5px 10px;
+					margin-left:		10px;
+					background:			#22C3AA;
+					font-size:			16px;
+					color:				white;
+				}
+
+
+
+footer {
+	padding:		0 0 30px;
+	display:		flex;
+	flex-flow:		row;
+	justify-content:space-around;
+}
+
+footer h3 {
+	width:			250px;
+	padding:		10px 0;
+	border-bottom:	1px solid #ccc;
+	font-size:		24px;
+}
+
+footer .code {
+	margin-top:		20px;
+	margin-right:	60px;
+}
+
+		.half-1, .half-2 {
+			width:				350px;
+		}
+
+		.half-2 .center {
+			margin-top:			36px;
+		}
+		.half-2 .center h4 {
+			padding-bottom:		10px;
+			font-size:			18px;
+		}
+
+		.half-2 .center p {
+			padding-bottom:		10px;
+		}
