@@ -1,0 +1,139 @@
+body {
+	font:		14px/1.4286 'Microsoft YaHei',sans-serif;
+}
+
+* {
+	padding:	0;
+	margin:		0;
+}
+
+.layout {
+	width:		900px;
+	margin:		0 auto;
+}
+
+header .h-card {
+	display:	inline-block;
+	margin:		80px 0;
+	padding:	0 30px;
+	text-align:	center;
+}
+		.h-card .avatar {
+			display:			inline-block;
+			width:				165px;
+			height:				165px;
+			border-radius:		50%;
+			background:			url(avatar.jpg) no-repeat top left;
+		}
+		.h-card .name {
+			display:			inline-block;
+			vertical-align:		top;
+			padding:			40px;
+		}
+				.name p {
+					font-weight:		bold;
+					font-size:			16px;
+				}
+
+		.h-card.contacts {
+			width:				360px;
+			padding-left:		20px;
+			padding-right:		0;
+			text-align:			left;
+			vertical-align:		top;
+		}
+				.contacts h3 {
+					padding:			0 0 10px 0;
+					border-bottom:		5px solid #262C2C;
+					font-size:			20px;
+				}
+				.contacts ul {
+					padding:			20px 0;
+					list-style:			none;
+				}
+
+.main {
+	padding:		0 50px;
+
+}
+
+.main h3 {
+	width:			360px;
+	padding:		10px 0;
+	border-bottom:	1px solid #ccc;
+	font-size:		20px;
+}
+		.description {
+			padding:			30px 0 30px 10px;
+			list-style:			none;
+		}
+		.description li {
+			padding-left:		50px;
+			padding-bottom:		30px;
+			border-left:		1px solid #ccc;
+		}
+		.description li::before {
+			content:			'';
+			width:				10px;
+			height:				10px;
+			background:			rgba(0, 0, 0, 0.9);
+			border-radius:		50%;
+			position:			absolute;
+			margin-left:		-55px;
+		}
+		.description .title {
+			line-height:		0.6;
+			padding-bottom:		16px;
+			font-size:			16px;
+		}
+		.description .title span {
+			color:				#d0d8d6;
+		}
+		.description .inside {
+			font-size:			14px;
+		}
+
+
+
+footer {
+	padding:		0 50px;
+	display:		flex;
+	flex-flow:		row;
+	justify-content:space-between;
+}
+
+footer h3 {
+	padding:			10px 0;
+	border-bottom:		1px solid #ccc;
+	font-size:			20px;
+}
+		.half-1, .half-2 {
+			width:				360px;
+		}
+
+		.half-1 ul {
+			padding-left:		10px;
+			list-style:			none;
+		}
+
+		.half-1 li {
+			padding-left:		50px;
+			padding-bottom:		20px;
+		}
+
+		.half-1 .title {
+			font-size:			16px;
+			padding:			20px 0 5px;
+		}
+
+
+		.half-2 .skills {
+			list-style:			none;
+		}
+
+				.skills li {
+					display:	inline-block;
+					width:		160px;
+					padding:	30px 0;
+					font-size:	16px;
+				}
