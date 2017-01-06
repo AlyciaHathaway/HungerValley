@@ -49,6 +49,16 @@ title: task_10
 
 ### 在什么场景下会出现外边距合并？如何合并？如何不让相邻元素外边距合并？给个父子外边距合并的范例
 
+
  - 相邻的兄弟元素
+ ![enter description here][1]
  - 父级和第一个/最后一个子元素
+ ![enter description here][2]
  - 空的block元素
+![enter description here][3]
+ - 设置BFC阻止外边距合并
+ 
+
+  [1]: http://www.w3school.com.cn/i/ct_css_margin_collapsing_example_1.gif
+  [2]: http://www.w3school.com.cn/i/ct_css_margin_collapsing_example_2.gif
+  [3]: http://www.w3school.com.cn/i/ct_css_margin_collapsing_example_3.gif
