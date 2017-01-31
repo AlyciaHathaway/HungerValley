@@ -161,4 +161,27 @@ console.log( truncate("hello world", 20) );
 ```
 ### 什么是 json？什么是 json 对象？什么是 json 对象字面量？什么是 JSON内置对象？
 
+ - JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于JavaScript（Standard ECMA-262 3rd Edition - December 1999）的一个子集，是一门语言
+
+ - JSON对象就是JSON的值，基本要符合以下规则
+	 1. 复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
+	 2. 简单类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和null（不能使用NaN, Infinity,
+		-Infinity和undefined）。
+	 3. 字符串必须使用双引号表示，不能使用单引号。
+	 4. 对象的键名必须放在双引号里面。
+	 5. 数组或对象最后一个成员的后面，不能加逗号。
+
+ - JSON对象字面量是一种简单的描述以及声明方式
+ - JSON是javascript中的内置对象，提供了JSON.parse()、JSON.stringify()等方法
+
 ### 如何把JSON 格式的字符串转换为对象？如何把对象转换为 JSON 格式的字符串?
+```
+var obj = {
+	"name":"luoqian",
+	"age":21
+}
+JSON.stringify(obj);
+
+var str = '{"name":"luoqian","age":21}';
+JSON.parse(str);
+```
