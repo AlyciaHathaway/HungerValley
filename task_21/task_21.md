@@ -143,9 +143,34 @@ function filterPositive(arr) {
 
 **Date任务**
 ### 写一个函数getChIntv，获取从当前时间到指定日期的间隔时间
+```
+function getChIntv(dateStr) {
+	var targetDate = new Date(dateStr);
+	var curDate = new Date();
+	var offset = Math.abs(targetDate - curDate);
 
+	var totalSeconds = Math.floor(offset/1000);
+	var seconds = totalSeconds%60;
+	var totalMinutes = Math.floor(totalSeconds/60);
+	var mimutes = totalMinutes%60;
+	var totalHours = Math.floor(totalMinutes/60);
+	var hours = totalHours%24;
+	var totalDays = Math.floor(totalHours/24);
+
+	return totalDays + '天' + hours + '小时' + mimutes + '分钟' + seconds + '秒'
+}
+```
 ### 把hh-mm-dd格式数字日期改成中文日期
-
+```
+function getChsDate(str) {
+	var dict = ["零","一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五","十六","十七","十八","十九","二十","二十一","二十二","二十三","二十四","二十五","二十六","二十七","二十八","二十九","三十","三十一"];
+	var conArr = str.split('-');
+	var chYear = dict[parseInt(conArr[0][0])] + dict[parseInt(conArr[0][1])] + dict[parseInt(conArr[0][2])] + dict[parseInt(conArr[0][3])] +'年';
+	var chMonth = dict[parseInt(conArr[1][0])] + '月';
+	var chDay = dict[parseInt(conArr[2][0])] + '日';
+	return chYear + chMonth + chDay;
+}
+```
 ### 写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串:
 
  - 刚刚（ t 距当前时间不到1分钟时间间隔）
@@ -154,3 +179,25 @@ function filterPositive(arr) {
  - 3天前 (t 距离当前时间大于等于24小时，小于30天)
  - 2个月前 (t 距离当前时间大于等于30天小于12个月)
  - 8年前 (t 距离当前时间大于等于12个月)
+
+```
+function friendlyDate(time){
+	var now = Date.now();
+	var offset = (now - parseInt(time)) / 1000 / 60; 
+	var result;
+	if ((offset / 60 / 24 / 30 / 12) >= 1 ) {
+	  result = parseInt(offset / 60 / 24 / 30 / 12) + "年前";
+	}else if ((offset / 60 / 24 / 30) >= 1  ) {
+      result = parseInt(offset / 60 / 24 / 30) + "个月前"; 
+	}else if ((offset / 60 / 24 ) >=1 ) {
+		result = parseInt(offset / 60 / 24) + "天前";
+	}else if ((offset / 60 ) >=1) {
+		result = parseInt(offset / 60 ) + "小时前";
+	}else if (offset >=1) {
+		result = parseInt(offset) + "分钟前";
+	}else if (offset <1) {
+		result = "刚刚";
+	}
+	return result;
+}
+```
