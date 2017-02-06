@@ -104,13 +104,26 @@ function add() {
 ### 补全代码，要求：当鼠标放置在li元素上，会在img-preview里展示当前li元素的data-img对应的图片
 ```
 <ul class="ct">
-    <li data-img="1.png">鼠标放置查看图片1</li>
-    <li data-img="2.png">鼠标放置查看图片2</li>
-    <li data-img="3.png">鼠标放置查看图片3</li>
+<li data-img="https://imgsa.baidu.com/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=372f4bb77ef40ad101e9cfb136457aba/e4dde71190ef76c69abb87a49816fdfaae5167d7.jpg">鼠标放置查看图片1</li>
+<li data-img="https://imgsa.baidu.com/baike/crop%3D0%2C0%2C440%2C292%3Bc0%3Dbaike80%2C5%2C5%2C80%2C26/sign=bf7e77eb0c23dd54353cfd28ec399fee/4034970a304e251fe1a7ef77a286c9177e3e53e8.jpg">鼠标放置查看图片2</li>
+<li data-img="https://imgsa.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=bf1bf8e31538534398c28f73f27adb1b/c2cec3fdfc0392455cb9ea808294a4c27d1e2534.jpg">鼠标放置查看图片3</li>
 </ul>
 <div class="img-preview"></div>
-<script>
-//你的代码
+<script type="text/javascript">
+	var ul = document.getElementsByClassName('ct');
+	var preview = document.getElementsByClassName('img-preview');
+	var li = document.querySelectorAll('ul li');
+	for (var i=0; i<li.length; i++) {
+		li[i].addEventListener('mouseover', function(e) {
+			var img = document.createElement('img');
+			var src = e.target.getAttribute('data-img');
+			img.setAttribute('src', src);
+			preview[0].appendChild(img);
+		})
+		li[i].addEventListener('mouseout', function(e) {
+			preview[0].innerHTML = '';
+		})
+	}
 </script>
 ```
 
