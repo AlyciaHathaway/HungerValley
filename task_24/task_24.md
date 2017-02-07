@@ -128,3 +128,7 @@ function add() {
 ```
 
 ###  在 github 上创建个人项目，把视频里事件兼容的函数写法放入项目，在 Readme.md里描述项目(选做题目)
+[事件兼容][1]
+
+
+  [1]: https://github.com/AlyciaHathaway/JStools
