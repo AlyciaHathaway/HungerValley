@@ -21,7 +21,7 @@ function random(min, max) {
 }
 function getRandStr(len) {
 	var dict = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	var str = '';
+	var str = ' ';
 	for (var i=0; i<len; i++) {
 		str += dict[random(0,62)]
 	}
