@@ -164,7 +164,7 @@ console.log( truncate("hello world", 20) );
  - JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于JavaScript（Standard ECMA-262 3rd Edition - December 1999）的一个子集，是一门语言
 
  - JSON对象就是JSON的值，基本要符合以下规则
-	 1. 复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
+	 1. 复合类型的值只能是数组或对象，不能是函数、正则表达式、日期对象。
 	 2. 简单类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和null（不能使用NaN, Infinity,
 		-Infinity和undefined）。
 	 3. 字符串必须使用双引号表示，不能使用单引号。
@@ -176,12 +176,14 @@ console.log( truncate("hello world", 20) );
 
 ### 如何把JSON 格式的字符串转换为对象？如何把对象转换为 JSON 格式的字符串?
 ```
+//对象转为JSON字符串
 var obj = {
-	"name":"luoqian",
+	"name":"jirengu",
 	"age":21
 }
 JSON.stringify(obj);
 
-var str = '{"name":"luoqian","age":21}';
+//JSON字符串转对象
+var str = '{"name":"jirengu","age":21}';
 JSON.parse(str);
 ```
