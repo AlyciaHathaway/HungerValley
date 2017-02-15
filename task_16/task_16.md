@@ -1,5 +1,5 @@
 ---
-title: JS相关概念
+title: task_16
 ---
 
 ### CSS和JS在网页中的放置顺序是怎样的？
@@ -13,11 +13,12 @@ title: JS相关概念
  - 浏览器的bug：如果把 CSS 放在底部，对于IE浏览器,在某些场景下(新窗口打开,刷新等)页面会出现白屏，而不是内容逐步展现
  - 使用 @import 标签：即使 CSS link引入，并且放在头部，也可能出现白屏
  - 网速慢：CSS link引入，放在头部，但在低于2G网速的情况下，会有一段白屏时间
+ - 对于图片和CSS，在加载时会并发加载(如一个域名下同时加载两个文件)。 但在加载 JavaScript 时，会禁用并发，并且阻止其他内容的下载.。所以把 JavaScript 放入页面顶部也会导致白屏现象。
 
 **FOUC(Flash of Unstyled Content)**
 
- - 浏览器的bug：如果把 CSS 放在底部,对于IE浏览器,在某些场景下(点击链接,输入URL,使用书签进入等)，会出现 FOUC 现象(逐步加载无样式的内容，等CSS加载后页面突然展现样式)。对于 Firefox 会一直表现出 FOUC 。
- - 对于图片和CSS，在加载时会并发加载(如一个域名下同时加载两个文件)。 但在加载 JavaScript 时，会禁用并发，并且阻止其他内容的下载.。所以把 JavaScript 放入页面顶部也会导致白屏现象。
+ - 浏览器厂商的渲染模式：如果把 CSS 放在底部,对于IE浏览器,在某些场景下(点击链接,输入URL,使用书签进入等)，会出现 FOUC 现象(逐步加载无样式的内容，等CSS加载后页面突然展现样式)。对于 Firefox 会一直表现出 FOUC 。
+
 
 ### async和defer的作用是什么？有什么区别
 ![enter description here][1]
@@ -42,8 +43,8 @@ title: JS相关概念
 ![enter description here][5]
 
 
-  [1]: ./images/legend.jpg "legend.jpg"
-  [2]: ./images/0001.jpg "0001.jpg"
-  [3]: ./images/0002.jpg "0002.jpg"
-  [4]: ./images/0003_1.jpg "0003.jpg"
-  [5]: ./images/render-tree-construction.png "render-tree-construction.png"
+  [1]: http://home.jscode.me/uploads/default/original/2X/d/d22d83925d18bf3db02944d0c4c9ae14dc979c48.jpg
+  [2]: http://home.jscode.me/uploads/default/optimized/2X/8/8fb770d05b2b79c03b6c69437bb9829f6fd6f4cb_1_690x84.jpg
+  [3]: http://home.jscode.me/uploads/default/optimized/2X/9/9984d1d0d3efc1a61e4c12052502add2e2737ac5_1_690x85.jpg
+  [4]: http://home.jscode.me/uploads/default/optimized/2X/8/8a8b064b6cf1c69127d633368fb2ad4d2610ab05_1_690x99.jpg
+  [5]: http://home.jscode.me/uploads/default/optimized/2X/4/4ce0d6fcb620b662d55d072e68e0876957225289_1_690x322.png
