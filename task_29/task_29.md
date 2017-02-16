@@ -105,11 +105,15 @@ $('.text1').attr('attributeName', 'value');//设置值
 $('.text1').attr('attributeName');//获取值
 ```
 ### 使用 jQuery实现如下效果
-![enter description here][1]
+[14-1][1]
 
 ### 使用 jQuery 实现如下效果
-![enter description here][2]
+[14-2][2]
+
+### 使用 jQuery 实现如下效果
+[14-3][3]
 
 
-  [1]: http://home.jscode.me/uploads/default/original/1X/6fa8fcceae2302be6e3edf5040fe24c44c44c77f.gif
-  [2]: http://home.jscode.me/uploads/default/optimized/1X/40ce161fccb9c958ce39bc6caf6b142eec3a1fe8_1_690x498.gif
+  [1]: http://js.jirengu.com/tifa/1
+  [2]: http://js.jirengu.com/vowo/1
+  [3]: http://js.jirengu.com/jiwu/1
