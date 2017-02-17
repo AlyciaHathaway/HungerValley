@@ -163,6 +163,40 @@ $node.index()
  - 当鼠标激活 input输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字
  - 当选择 select 后，获取用户选择的内容
 
-### 用 jQuery ajax 实现如下效果。当点击加载更多会加载数据展示到页面
 
-### 实现一个天气预报页面，前端展示自由发挥，数据接口: http://api.jirengu.com/weather.php (选做题目)
+[代码][1]
+
+
+### 用 jQuery ajax 实现如下效果。当点击加载更多会加载数据展示到页面
+```
+var pageIndex = 0;
+$('.load-more').on('click', function() {
+	$.get('/getNews', {page: pageIndex}).done(function(ret) {
+		if(ret.status === 0) {
+			pageIndex += 1;
+			appendHtml(ret.data)
+		}else {
+			alert('获取列表出错')
+		}
+	}).fail(function() {
+		alert('系统异常')
+	})
+})
+
+function appendHtml(news) {
+	if (new.length === 0) {
+		$('.load-more').remove();
+		$('.container').append('<p>没有更多数据了</p>');
+		return;
+	}
+	var htmls = '';
+	$.each(news, function() {
+		htmls += '<li class="item">';
+		htmls += '<a href="' + this.link + '">';
+		htmls += '</a></li>';
+	})
+	$('.news').append(htmls);
+}
+```
+
+  [1]: http://js.jirengu.com/vuge/1
