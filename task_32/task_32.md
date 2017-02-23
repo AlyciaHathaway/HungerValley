@@ -17,7 +17,8 @@ title: task_32
 
 [无限轮播][1]
 ### 实现一个渐变轮播效果
-
+[渐变轮播][2]
 
 
   [1]: http://js.jirengu.com/fixe/1
+  [2]: http://js.jirengu.com/hiyu/1/edit
