@@ -3,8 +3,10 @@ title: task_33
 ---
 
 ### 实现一个瀑布流布局效果
-
+[瀑布流][1]
 ### 实现木桶布局效果
+[木桶][2]
 
-### 实现一个新闻瀑布流新闻网站，查看效果46 (选做题目)
-jsonp 接口参数： http://platform.sina.com.cn/slide/album_tech?jsoncallback=func&app_key=1271687855&num=3&page=4
+
+  [1]: http://js.jirengu.com/vequ/1/edit
+  [2]: http://js.jirengu.com/jida/1/edit
