@@ -48,7 +48,6 @@
         var _this = this;
         var imgUrls = this.getImgUrls(100);
         $.each(imgUrls,function(idx, url){
-          console.log(url);
           var img = new Image();
           img.src = url;
           img.onload = function(){
@@ -93,7 +92,6 @@
       },
 
       createRow: function(rowHeight){
-        console.log('createRow');
         var $rowCt = $('<div class="img-row"></div>');
         $.each(this.rowList, function(idx, imgInfo){
           var $imgCt = $('<div class="img-box"></div>'),
@@ -102,7 +100,6 @@
               $imgCt.append($img);
               $rowCt.append($imgCt);
         });
-        console.log(this.$ct)
         this.$ct.append($rowCt);
 
 
@@ -110,7 +107,6 @@
       getImgUrls: function(num) {
         var color, width, height, urls = [];
         for (var i = 0; i < num; i++) {
-          color = Math.random().toString(16).substring(2, 8);
           width = Math.floor(Math.random() * 100 + 50);
           height = Math.floor(Math.random() * 30 + 50);
           urls.push("https://unsplash.it/" + width + "/" + height + "/?random");
