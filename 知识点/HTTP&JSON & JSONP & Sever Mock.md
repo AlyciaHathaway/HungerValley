@@ -23,6 +23,13 @@ title: HTTP&JSON & JSONP & Sever Mock
  4. 响应体
 	随便字符串
 
+**怎么发一个GET请求**
+
+ 1. 地址栏输入网址，回车
+ 2. `<link href="style.css">`
+ 3. `<script src="main.js"></script>`
+ 4. `<img src="1.png">`
+
 ### 重点1
 
  - URL路径和文件没有任何关系
