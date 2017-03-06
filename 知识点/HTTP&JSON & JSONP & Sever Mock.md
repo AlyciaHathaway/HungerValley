@@ -2,6 +2,13 @@
 title: HTTP&JSON & JSONP & Sever Mock
 ---
 ### HTTP
+**概念**
+
+ - sever
+ - client
+ - request
+ - response
+ - DNS
 
 **Request**
 
@@ -26,9 +33,19 @@ title: HTTP&JSON & JSONP & Sever Mock
 **怎么发一个GET请求**
 
  1. 地址栏输入网址，回车
- 2. `<link href="style.css">`
+ 2. `<link rel="stylesheet" href="style.css">`
  3. `<script src="main.js"></script>`
  4. `<img src="1.png">`
+
+**怎么发一个POST请求**
+
+ - `<form action="/pppp" method="post">`form表单的method属性
+ 
+ **GET VS POST**
+ 
+ - 语义不同，GET浏览内容、下载内容，一般生成内容、发布内容要用POST
+ - GET+路径（GET一般没有消息体）、POST+路径+消息体
+ - 在底层TCP/IP协议，GET只发一个报文，POST发两个
 
 ### 重点1
 
