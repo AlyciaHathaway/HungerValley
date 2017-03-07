@@ -2,7 +2,7 @@
 title: flex
 ---
 ### 基本概念
-
+![enter description here][1]
 ### flex container 的属性
 
  - flex-direction：方向
@@ -21,3 +21,6 @@ title: flex
  - flex：上面三个的缩写
  - order：顺序（代替双飞翼）
  - align-self：自身的对齐方式（高度不能写死）
+
+
+  [1]: ./images/%E6%9A%B4%E9%A3%8E%E6%88%AA%E5%9B%BE20173745383966.jpg "暴风截图20173745383966.jpg"
