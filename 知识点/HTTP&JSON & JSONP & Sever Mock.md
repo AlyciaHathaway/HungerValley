@@ -1,13 +1,15 @@
 ---
 title: HTTP&JSON & JSONP & Sever Mock
 ---
-### HTTP
+### HTTP基础
 **概念**
 
  - sever
  - client
  - request
  - response
+ - 浏览器缓存
+ - 本地HOSTS
  - DNS
 
 **Request**
@@ -47,6 +49,10 @@ title: HTTP&JSON & JSONP & Sever Mock
  - GET+路径（GET一般没有消息体）、POST+路径+消息体
  - 在底层TCP/IP协议，GET只发一个报文，POST发两个
 
+### 搭建一个服务器
+![enter description here][1]
+
+
 ### 重点1
 
  - URL路径和文件没有任何关系
@@ -76,3 +82,6 @@ title: HTTP&JSON & JSONP & Sever Mock
 ### 重点7
 
  - HTTP就是字符串 / 二进制（人类看不懂的，视频、音频、图像）传来传去
+
+
+  [1]: ./images/%E6%9A%B4%E9%A3%8E%E6%88%AA%E5%9B%BE2017372553533.jpg "暴风截图2017372553533.jpg"
