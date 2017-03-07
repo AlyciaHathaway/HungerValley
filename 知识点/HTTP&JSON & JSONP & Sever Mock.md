@@ -83,5 +83,61 @@ title: HTTP&JSON & JSONP & Sever Mock
 
  - HTTP就是字符串 / 二进制（人类看不懂的，视频、音频、图像）传来传去
 
+### sever.js
+![enter description here][2]
+
+```
+var http = require('http');
+var fs = require('fs');
+
+var port = process.env.PORT || 8080;
+
+var server = http.createServer(function(request, response) {
+
+	// if (request.url === '/1') {
+	// 	response.end('<title>1</title>你请求1干什么？我给你一个随机数' + Math.random())
+	// }else if (request.url === '/2') {
+	// 	response.end('你很2哎')
+	// }else if (request.url === '3.js') {
+	// 	response.setHeader('Content-Type', 'application/javascript')
+	// 	response.end('var a = 1; alert(a);')
+	// }
+
+	var temp = url.parse(request.url, true)
+	var path = temp.pathname
+	var query = temp.query
+
+	switch (path) {
+		case '/index.html':
+			var htmlString = fs.readFileSync('./index.html')
+			response.setHeader('Content-Type', 'text/html')
+			response.end(htmlString)
+			break;
+		case '/style.css':
+			var cssString = fs.readFileSync('./style.css')
+			response.setHeader('Content-Type', 'text/css')
+			response.end(cssString)
+			break;
+		case '/main.js':
+			// jsonp: callback的值是什么，response传过去的函数名就是什么
+			var functionName = query.callback
+			response.setHeader('Content-Type', 'application/javascript')
+			response.end(functionName + '(1)')
+			break;
+		case '/data.json':
+			response.setHeader('Content-Type', 'application/json')
+			response.end('{"name": "frank", "age": 18}')
+			break;
+		default:
+			response.end('404')
+			break;
+	}
+})
+
+sever.listen(port)
+console.log('监听成功')
+```
+
 
   [1]: ./images/%E6%9A%B4%E9%A3%8E%E6%88%AA%E5%9B%BE2017372553533.jpg "暴风截图2017372553533.jpg"
+  [2]: ./images/%E6%9A%B4%E9%A3%8E%E6%88%AA%E5%9B%BE20173751938785.jpg "暴风截图20173751938785.jpg"
