@@ -15,5 +15,5 @@ html, body {
     height:     400px;
     margin:     0 auto;
     border:     1px solid red;
-    background: url("img/bg.jpg") center center / cover no-repeat;
+    /*background: url("img/bg.jpg") center center / cover no-repeat;*/
 }
