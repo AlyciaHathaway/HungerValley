@@ -15,7 +15,7 @@
 
         .icon-font {
             font-family:"iconfont" !important;
-            font-size:36px;
+            font-size:30px;
             font-style:normal;
             color:#eee;
             -webkit-font-smoothing: antialiased;
@@ -28,65 +28,50 @@
     <div class="layout">
         <div class="panel-1">
             <!--返回键-->
-            <div id="back">
-                <i class="icon-font">&#xe607;</i>
-            </div>
+            <i id="back" class="icon-font">&#xe607;</i>
             <!--标题栏-->
             <div id="title">
                 <h3>飞鸟和她</h3>
                 <p>v不才v</p>
             </div>
             <!--分享按钮-->
-            <div id="share">
-                <i class="icon-font">&#xe62e;</i>
-            </div>
+            <i id="share" class="icon-font">&#xe62e;</i>
         </div>
 
         <div class="panel-2">
             <!--黑胶旋转-->
-                <div class="needle needle-pause"></div>
-                <div class="record active">
-
-                </div>
+            <img id="needle" src="img/needle.png" alt="needle">
+            <img id="record" src="img/record.png" alt="record">
+            <img id="cover" src="img/cover.jpg" alt="cover" >
             <!--歌词栏-->
             <div id="lyric"></div>
         </div>
 
         <div class="panel-3">
             <!--喜欢-->
-            <div id="like">
-                <i class="icon-font">&#xe63d;</i>
-            </div>
+            <i id="like" class="icon-font">&#xe63d;</i>
             <!--下载-->
-            <div id="download">
-                <i class="icon-font">&#xe62f;</i>
-            </div>
+            <i id="download" class="icon-font">&#xe62f;</i>
             <!--评论-->
-            <div id="comment">
-                <i class="icon-font">&#xe605;</i>
-            </div>
+            <i id="comment" class="icon-font">&#xe605;</i>
             <!--歌词显示-->
-            <div id="lyric-btn">
-                <i class="icon-font">&#xe61e;</i>
-            </div>
+            <i id="lyric-btn" class="icon-font">&#xe61e;</i>
         </div>
 
         <div class="panel-4">
             <!--进度条-->
-            <div id="progress"></div>
+            <span id="current-time" class="time">0:00</span>
+            <progress class="time" max="100" value="20"></progress>
+            <span id="full-time" class="time">4:00</span>
         </div>
 
         <div class="panel-5">
             <!--循环控制-->
-            <div id="turn">
-                <i class="icon-font">&#xe600;</i>
-            </div>
+            <i id="turn" class="icon-font">&#xe600;</i>
             <!--播放控制-->
-            <div id="control">
-                <i class="icon-font">&#xe64d;</i>
-                <i class="icon-font">&#xe696;</i>
-                <i class="icon-font">&#xe64c;</i>
-            </div>
+            <i id="pre" class="control icon-font">&#xe64d;</i>
+            <i id="play" class="control icon-font">&#xe696;</i>
+            <i id="next" class="control icon-font">&#xe64c;</i>
             <!--频道栏-->
             <div id="channels"></div>
         </div>

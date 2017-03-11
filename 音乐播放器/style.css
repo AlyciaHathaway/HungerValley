@@ -79,10 +79,68 @@ html, body {
 .panel-2 {
     width:          300px;
     height:         240px;
+    position:       relative;
 }
 
+        #needle {
+            display:        inline-block;
+            width:          60px;
+            height:         88px;
+            position:       absolute;
+            top:            -3px;
+            left:           140px;
+            z-index:        9;
+        }
 
+        #record {
+            display:        inline-block;
+            width:          200px;
+            height:         200px;
+            position:       absolute;
+            top:            50%;
+            left:           50%;
+            margin-top:     -80px;
+            margin-left:    -100px;
+        }
 
+        #cover {
+            display:        inline-block;
+            width:          126px;
+            height:         126px;
+            position:       absolute;
+            top:            50%;
+            left:           50%;
+            margin-top:     -42px;
+            margin-left:    -62px;
+            border-radius:  50%;
+        }
+
+.panel-3 {
+    width:          300px;
+    height:         60px;
+    margin-top:     30px;
+    display:        flex;
+    justify-content:space-around;
+}
+
+.panel-4 {
+    width:          272px;
+    height:         14px;
+    font-size:      12px;
+    text-align:     center;
+    color:          #fff;
+}
+
+.panel-4 .time {
+    display:        inline-block;
+    line-height:    14px;
+}
+
+        progress {
+            width:          180px;
+            height:         4px;
+            border-radius:  2px;
+        }
 
 
 
