@@ -96,6 +96,21 @@ var $pauseButton = $('#pause');
 $pauseButton.on('click', function() {
     audio.pause();
     stopUpdateProgress()
-})
+});
+
+$('#play').on('click', function() {
+    play(current)
+});
+
+$('#prev').on('click', function() {
+    play(current - 1)
+});
+
+$('#next').on('click', function() {
+    play(current + 1)
+});
+
+
+
 
 
