@@ -38,9 +38,9 @@
 // //call和apply的形式，this绑定到传入的第一个参数
 
 var songs = [{
-    url: 'http://116.224.86.33/m10.music.126.net/20170313154931/ff75110e63e0ba6d7f799aa15a77057a/ymusic/f799/9eed/b557/46577dcc2e0ce9c19facff8f6117e559.mp3',
-    name: '大鱼',
-    singer: '双笙'
+    url: 'http://116.224.86.33/m10.music.126.net/20170313185020/5e21663e112d9dcf5dcfbb71921435e3/ymusic/0d8e/bbfa/8456/4201ff4f87439d197f3887832f9f5c59.mp3',
+    name: '爱殇',
+    singer: '董贞'
 }, {
     url: 'http://116.224.86.27/m10.music.126.net/20170313155744/a4c8f641fa577d73e599239cf624aa6c/ymusic/1877/1feb/641e/00de73aa50577a5ebf80c5306402aabc.mp3',
     name: '真言',
@@ -51,10 +51,11 @@ var songs = [{
     singer: 'Sophie Zelmani'
 }];
 
-var audio = $('#audio').get(0);
-var progress = $('#progress').get(0);
+var audio = $('audio').get(0);
+var progress = $('progress').get(0);
 //当前第几首
 var current = 0;
+
 function play(n) {
     if (n >= songs.length) {
         n = 0
@@ -69,11 +70,10 @@ function play(n) {
     audio.play();
     current = n;
     progress.value = 0;
-
     setTimeout(function() {
         //duration音频的总长度
-        progress.max = audio.duration
-    }, 100);
+        progress.max = audio.duration;
+    },100);
 
     updateProgress()
 }
@@ -92,14 +92,17 @@ function stopUpdateProgress() {
     clearInterval(interval);
 }
 
-var $pauseButton = $('#pause');
-$pauseButton.on('click', function() {
-    audio.pause();
-    stopUpdateProgress()
+$('#play').on('click', function() {
+    $(this).css('display', 'none');
+    $(this).next('#pause').css('display', 'inline-block');
+    play(current)
 });
 
-$('#play').on('click', function() {
-    play(current)
+$('#pause').on('click', function() {
+    $(this).css('display', 'none');
+    $(this).prev('#play').css('display', 'inline-block');
+    audio.pause();
+    stopUpdateProgress()
 });
 
 $('#prev').on('click', function() {
@@ -109,8 +112,4 @@ $('#prev').on('click', function() {
 $('#next').on('click', function() {
     play(current + 1)
 });
-
-
-
-
 

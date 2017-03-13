@@ -141,10 +141,18 @@ html, body {
         }
 
 .panel-5 {
-    height:         20px;
+    height:         60px;
     margin-top:     20px;
     display:        flex;
     justify-content:space-around;
+}
+
+.panel-5 #pause {
+    display:        none;
+}
+
+.panel-5 #play {
+    display:        inline-block;
 }
 
 .panel-5 #channels {
@@ -157,6 +165,8 @@ html, body {
     background-color: gray;
     background-clip:content-box;
 }
+
+
 
 
 
