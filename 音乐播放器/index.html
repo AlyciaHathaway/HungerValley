@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>src="//code.jquery.com/jquery-2.1.1.min.js"</script>
     <meta charset="UTF-8">
     <title>音乐播放器</title>
     <link rel="stylesheet" href="style.css">
@@ -61,7 +62,7 @@
         <div class="panel-4">
             <!--进度条-->
             <span id="current-time" class="time">0:00</span>
-            <progress class="time" max="100" value="20"></progress>
+            <progress id="progress" class="time" max="100" value="20"></progress>
             <span id="full-time" class="time">4:00</span>
         </div>
 
@@ -70,11 +71,13 @@
             <i id="turn" class="icon-font">&#xe600;</i>
             <!--播放控制-->
             <i id="pre" class="control icon-font">&#xe64d;</i>
-            <i id="play" class="control icon-font">&#xe696;</i>
+            <i id="play" class="control icon-font">&#xf0013;</i>
+            <i id="pause" class="control icon-font">&#xe696;</i>
             <i id="next" class="control icon-font">&#xe64c;</i>
             <!--频道栏-->
             <div id="channels"></div>
         </div>
+        <audio id="audio" src=""></audio>
     </div>
 </body>
 </html>
