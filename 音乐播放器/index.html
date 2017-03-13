@@ -18,6 +18,7 @@
             font-size:30px;
             font-style:normal;
             color:#eee;
+            cursor:pointer;
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: 0.2px;
             -moz-osx-font-smoothing: grayscale;
@@ -41,8 +42,9 @@
         <div class="panel-2">
             <!--黑胶旋转-->
             <img id="needle" src="img/needle.png" alt="needle">
-            <img id="record" src="img/record.png" alt="record">
-            <img id="cover" src="img/cover.jpg" alt="cover" >
+            <div class="record active">
+                <div class="cover"></div>
+            </div>
             <!--歌词栏-->
             <div id="lyric"></div>
         </div>
@@ -69,10 +71,10 @@
             <!--循环控制-->
             <i id="turn" class="icon-font">&#xe600;</i>
             <!--播放控制-->
-            <i id="prev" class="control icon-font">&#xe64d;</i>
-            <i id="play" class="control icon-font">&#xf0013;</i>
-            <i id="pause" class="control icon-font">&#xe696;</i>
-            <i id="next" class="control icon-font">&#xe64c;</i>
+            <i id="prev" class="icon-font">&#xe64d;</i>
+            <i id="play" class="icon-font">&#xf0013;</i>
+            <i id="pause" class="hide icon-font">&#xe696;</i>
+            <i id="next" class="icon-font">&#xe64c;</i>
             <!--频道栏-->
             <div id="channels"></div>
         </div>

@@ -87,13 +87,40 @@ html, body {
             width:          60px;
             height:         88px;
             position:       absolute;
-            top:            -3px;
-            left:           140px;
+            top:            -12px;
+            left:           157px;
+            transform:      rotate(-25deg);
+            transition:     .5s;
             z-index:        9;
         }
 
-        #record {
-            display:        inline-block;
+        .needle-play {
+            top:            -3px !important;
+            left:           140px !important;
+            transform:      rotate(0deg) !important;
+            transition:     .5s;
+        }
+
+        .active {
+            animation-play-state:paused;
+            animation-name: rotate;
+            animation-duration: 25s;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            animation-direction: normal;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .record {
             width:          200px;
             height:         200px;
             position:       absolute;
@@ -101,18 +128,20 @@ html, body {
             left:           50%;
             margin-top:     -80px;
             margin-left:    -100px;
+            background:     url("img/record.png") no-repeat center center;
+            background-size:cover;
         }
 
-        #cover {
-            display:        inline-block;
+        .cover {
             width:          126px;
             height:         126px;
             position:       absolute;
             top:            50%;
             left:           50%;
-            margin-top:     -42px;
-            margin-left:    -62px;
+            transform:      translate(-50%, -50%);
             border-radius:  50%;
+            background:     url("img/cover.jpg") no-repeat center center;
+            background-size:cover;
         }
 
 .panel-3 {
@@ -147,12 +176,8 @@ html, body {
     justify-content:space-around;
 }
 
-.panel-5 #pause {
+.panel-5 .hide {
     display:        none;
-}
-
-.panel-5 #play {
-    display:        inline-block;
 }
 
 .panel-5 #channels {

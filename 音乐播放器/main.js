@@ -70,12 +70,14 @@ function play(n) {
     audio.play();
     current = n;
     progress.value = 0;
-    setTimeout(function() {
+    audio.addEventListener('playing', function() {
         //duration音频的总长度
         progress.max = audio.duration;
-    },100);
+    });
 
-    updateProgress()
+    updateProgress();
+    currentTime();
+    $('.active').css('animation-play-state', 'running');
 }
 
 var interval;
@@ -88,28 +90,63 @@ function updateProgress() {
     }
 }
 
-function stopUpdateProgress() {
-    clearInterval(interval);
+function currentTime() {
+    setInterval(time, 1000);
+    function time() {
+        $('#current-time').text(parseInt(audio.currentTime / 60) +
+            ':' + parseInt(audio.currentTime % 60));
+    }
 }
 
+audio.addEventListener('playing', function() {
+    $('#full-time').text(parseInt(audio.duration / 60) +
+        ':' + parseInt(audio.duration % 60))
+});
+// function stopUpdateProgress() {
+//     clearInterval(interval);
+// }
+
 $('#play').on('click', function() {
-    $(this).css('display', 'none');
-    $(this).next('#pause').css('display', 'inline-block');
-    play(current)
+    $(this).addClass('hide');
+    $(this).next('#pause').removeClass('hide');
+    $('#needle').addClass('needle-play');
+    $('.active').css('animation-play-state', 'running');
+    if (progress.value !== 0) {
+        audio.play()
+    }else {
+        play(current)
+    }
 });
 
 $('#pause').on('click', function() {
-    $(this).css('display', 'none');
-    $(this).prev('#play').css('display', 'inline-block');
+    $(this).addClass('hide');
+    $(this).prev('#play').removeClass('hide');
+    $('#needle').removeClass('needle-play');
+    $('.active').css('animation-play-state', 'paused');
     audio.pause();
-    stopUpdateProgress()
 });
 
 $('#prev').on('click', function() {
+    if ($('#pause').hasClass('hide')) {
+        $('#play').addClass('hide');
+        $('#pause').removeClass('hide');
+    }
+    $('#needle').removeClass('needle-play');
+    setTimeout(function() {
+        $('#needle').addClass('needle-play');
+    }, 400)
     play(current - 1)
 });
 
 $('#next').on('click', function() {
+    if ($('#pause').hasClass('hide')) {
+        $('#play').addClass('hide');
+        $('#pause').removeClass('hide');
+    }
+    $('#needle').removeClass('needle-play');
+    setTimeout(function() {
+        $('#needle').addClass('needle-play');
+    }, 400)
     play(current + 1)
 });
 
