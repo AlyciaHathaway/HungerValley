@@ -105,15 +105,14 @@ function play(n) {
 }
 
 function updateProgress() {
-    setInterval(function() {
+    // setInterval(function() {
+    //     progress.value = audio.currentTime;
+    // }, 1000);
+    setTimeout(function updateProgress() {
         progress.value = audio.currentTime;
-    }, 1000);
+        setTimeout(updateProgress, 1000)
+    },1000)
 }
-
-setTimeout(function updateProgress() {
-    progress.value = audio.currentTime;
-    setTimeout(updateProgress, 1000)
-},1000)
 
 function updateTime() {
     setTimeout(function time() {
