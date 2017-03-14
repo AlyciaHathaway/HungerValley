@@ -37,19 +37,35 @@
 // Test.apply({p: 1});
 // //call和apply的形式，this绑定到传入的第一个参数
 
-var songs = [{
-    url: 'http://116.224.86.33/m10.music.126.net/20170313185020/5e21663e112d9dcf5dcfbb71921435e3/ymusic/0d8e/bbfa/8456/4201ff4f87439d197f3887832f9f5c59.mp3',
-    name: '爱殇',
-    singer: '董贞'
-}, {
-    url: 'http://116.224.86.27/m10.music.126.net/20170313155744/a4c8f641fa577d73e599239cf624aa6c/ymusic/1877/1feb/641e/00de73aa50577a5ebf80c5306402aabc.mp3',
-    name: '真言',
-    singer: '黛青塔娜'
-}, {
-    url: 'http://116.224.86.27/m10.music.126.net/20170313155923/3997467702363646f61d83a066cf2090/ymusic/362b/5880/8a80/b27f3f16373ffea1a985c064bbcd63e0.mp3',
-    name: 'Dreamer',
-    singer: 'Sophie Zelmani'
-}];
+var songs = [];
+
+(function getSong() {
+    $.get('http://api.jirengu.com/fm/getSong.php')
+        .done(function(songsStr) {
+            var severSong = JSON.parse(songsStr).song[0];
+            songs.push(severSong);
+        })
+        .fail(function() {
+            console.log('获取歌曲失败')
+        })
+})();
+
+$('.channels').on('click', function getChannel() {
+    $.get('http://api.jirengu.com/fm/getChannels.php')
+        .done(function(channelsStr) {
+            var channelsArr = JSON.parse(channelsStr).channels;
+            for (var i=0; i<channelsArr.length; i++) {
+                var channelName = channelsArr[i].name;
+                var channelID = channelsArr[i].id;
+                var html = '<li channel-id=\"' + channelID + '\">' + channelName + '</li>';
+                $('.channels').append(html);
+            }
+            $('.channels li').first().addClass('list-selected');
+        })
+        .fail(function() {
+            $('.channels').append('<li>获取失败</li>');
+        })
+});
 
 var audio = $('audio').get(0);
 var progress = $('progress').get(0);
@@ -107,10 +123,14 @@ audio.addEventListener('playing', function() {
 // }
 
 $('#play').on('click', function() {
+    //图标切换
     $(this).addClass('hide');
     $(this).next('#pause').removeClass('hide');
+    //唱针动画
     $('#needle').addClass('needle-play');
+    //唱片旋转
     $('.active').css('animation-play-state', 'running');
+    //暂停而不是停止
     if (progress.value !== 0) {
         audio.play()
     }else {
@@ -119,18 +139,23 @@ $('#play').on('click', function() {
 });
 
 $('#pause').on('click', function() {
+    //图标切换
     $(this).addClass('hide');
     $(this).prev('#play').removeClass('hide');
+    //唱针动画
     $('#needle').removeClass('needle-play');
+    //唱片旋转
     $('.active').css('animation-play-state', 'paused');
     audio.pause();
 });
 
 $('#prev').on('click', function() {
+    //图标切换
     if ($('#pause').hasClass('hide')) {
         $('#play').addClass('hide');
         $('#pause').removeClass('hide');
     }
+    //唱针动画
     $('#needle').removeClass('needle-play');
     setTimeout(function() {
         $('#needle').addClass('needle-play');
@@ -139,10 +164,12 @@ $('#prev').on('click', function() {
 });
 
 $('#next').on('click', function() {
+    //图标切换
     if ($('#pause').hasClass('hide')) {
         $('#play').addClass('hide');
         $('#pause').removeClass('hide');
     }
+    //唱针动画
     $('#needle').removeClass('needle-play');
     setTimeout(function() {
         $('#needle').addClass('needle-play');
