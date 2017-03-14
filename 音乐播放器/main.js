@@ -39,7 +39,7 @@
 
 var songs = [];
 
-(function getSong() {
+function getSong() {
     $.get('http://api.jirengu.com/fm/getSong.php')
         .done(function(songsStr) {
             var severSong = JSON.parse(songsStr).song[0];
@@ -48,7 +48,7 @@ var songs = [];
         .fail(function() {
             console.log('获取歌曲失败')
         })
-})();
+}
 
 $('.channels').on('click', function getChannel() {
     $.get('http://api.jirengu.com/fm/getChannels.php')
@@ -73,6 +73,7 @@ var progress = $('progress').get(0);
 var current = 0;
 
 function play(n) {
+    getSong();
     if (n >= songs.length) {
         n = 0
     }
@@ -85,42 +86,47 @@ function play(n) {
     audio.src = song.url;
     audio.play();
     current = n;
-    progress.value = 0;
+
     audio.addEventListener('playing', function() {
+        //value值初始化
+        progress.value = 0;
         //duration音频的总长度
         progress.max = audio.duration;
+
+        //进度条更新
+        updateProgress();
+        //时间更新
+        updateTime();
+        //总时长更新
+        fullTime();
     });
 
-    updateProgress();
-    currentTime();
     $('.active').css('animation-play-state', 'running');
 }
 
-var interval;
-//更新进度条
 function updateProgress() {
-    interval = setInterval(update, 1000);
-    function update() {
-        //currentTime音频的当前播放位置
+    setInterval(function() {
         progress.value = audio.currentTime;
-    }
+    }, 1000);
 }
 
-function currentTime() {
-    setInterval(time, 1000);
-    function time() {
+setTimeout(function updateProgress() {
+    progress.value = audio.currentTime;
+    setTimeout(updateProgress, 1000)
+},1000)
+
+function updateTime() {
+    setTimeout(function time() {
         $('#current-time').text(parseInt(audio.currentTime / 60) +
             ':' + parseInt(audio.currentTime % 60));
-    }
+        setTimeout(time, 1000);
+    }, 0)
 }
 
-audio.addEventListener('playing', function() {
+function fullTime() {
     $('#full-time').text(parseInt(audio.duration / 60) +
         ':' + parseInt(audio.duration % 60))
-});
-// function stopUpdateProgress() {
-//     clearInterval(interval);
-// }
+}
 
 $('#play').on('click', function() {
     //图标切换
@@ -176,4 +182,9 @@ $('#next').on('click', function() {
     }, 400)
     play(current + 1)
 });
+
+$('#loop').on('click', function() {
+    console.log('设置循环')
+    audio.setAttribute('loop','loop')
+})
 

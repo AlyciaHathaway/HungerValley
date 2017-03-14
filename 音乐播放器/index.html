@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="never">
     <title>音乐播放器</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -26,6 +27,7 @@
     </style>
 </head>
 <body>
+    <p>生命短暂，唯音乐和美酒不可辜负</p>
     <div class="layout">
         <div class="panel-1">
             <!--返回键-->
@@ -42,8 +44,8 @@
         <div class="panel-2">
             <!--黑胶旋转-->
             <img id="needle" src="img/needle.png" alt="needle">
-            <div class="record active">
-                <div class="cover"></div>
+            <div id="record" class="active">
+                <div id="cover"></div>
             </div>
             <!--歌词栏-->
             <div id="lyric"></div>
@@ -69,7 +71,7 @@
 
         <div class="panel-5">
             <!--循环控制-->
-            <i id="turn" class="icon-font">&#xe600;</i>
+            <i id="loop" class="icon-font">&#xe600;</i>
             <!--播放控制-->
             <i id="prev" class="icon-font">&#xe64d;</i>
             <i id="play" class="icon-font">&#xf0013;</i>

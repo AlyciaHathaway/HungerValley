@@ -13,6 +13,11 @@ html, body {
     box-sizing:     border-box;
 }
 
+p {
+    color:          #3bc100;
+    text-align:     center;
+}
+
 .layout {
     width:          300px;
     height:         480px;
@@ -101,6 +106,18 @@ html, body {
             transition:     .5s;
         }
 
+        #record {
+            width:          200px;
+            height:         200px;
+            position:       absolute;
+            top:            50%;
+            left:           50%;
+            margin-top:     -80px;
+            margin-left:    -100px;
+            background:     url("img/record.png") no-repeat center center;
+            background-size:cover;
+        }
+
         .active {
             animation-play-state:paused;
             animation-name: rotate;
@@ -120,19 +137,7 @@ html, body {
             }
         }
 
-        .record {
-            width:          200px;
-            height:         200px;
-            position:       absolute;
-            top:            50%;
-            left:           50%;
-            margin-top:     -80px;
-            margin-left:    -100px;
-            background:     url("img/record.png") no-repeat center center;
-            background-size:cover;
-        }
-
-        .cover {
+        #cover {
             width:          126px;
             height:         126px;
             position:       absolute;
