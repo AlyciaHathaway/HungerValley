@@ -39,8 +39,10 @@
 
 var songs = [];
 
-function getSong() {
-    $.get('http://api.jirengu.com/fm/getSong.php')
+function getSong(channelID) {
+    $.get('http://api.jirengu.com/fm/getSong.php', {
+        channel: channelID
+    })
         .done(function(songsStr) {
             var severSong = JSON.parse(songsStr).song[0];
             songs.push(severSong);
@@ -50,21 +52,40 @@ function getSong() {
         })
 }
 
-$('.channels').on('click', function getChannel() {
+
+var channelLock = true;
+function getChannel() {
     $.get('http://api.jirengu.com/fm/getChannels.php')
         .done(function(channelsStr) {
-            var channelsArr = JSON.parse(channelsStr).channels;
-            for (var i=0; i<channelsArr.length; i++) {
-                var channelName = channelsArr[i].name;
-                var channelID = channelsArr[i].id;
-                var html = '<li channel-id=\"' + channelID + '\">' + channelName + '</li>';
-                $('.channels').append(html);
+            if(channelLock){
+                var channelsArr = JSON.parse(channelsStr).channels;
+                for (var i=0; i<channelsArr.length; i++) {
+                    var channelName = channelsArr[i].name;
+                    var channelID = channelsArr[i].channel_id;
+                    var html = '<li channel-id=\"' + channelID + '\">' + channelName + '</li>';
+                    $('.channel-list').append(html);
+                }
+                $('.channels li').first().addClass('list-selected');
+                $('.channel-list').css('display', 'block');
+                channelLock = false;
             }
-            $('.channels li').first().addClass('list-selected');
         })
         .fail(function() {
-            $('.channels').append('<li>获取失败</li>');
+            $('.channel-list').append('<li>获取失败</li>');
         })
+}
+
+$('.channels').click(getChannel);
+$('.channel-list').mouseleave(function() {
+    $('.channel-list').css('display', 'none');
+    $('.channel-list').empty();
+    channelLock = true;
+});
+
+$('.channels li').on('click', function() {
+    var id = $(this).first().attr('channel-id');
+    console.log(id);
+    getSong(id);
 });
 
 var audio = $('audio').get(0);
@@ -103,23 +124,16 @@ function play(n) {
 
     $('.active').css('animation-play-state', 'running');
 }
-
+//【疑惑：递归的出口在哪里，这样写会不会爆栈？】
 function updateProgress() {
-    // setInterval(function() {
-    //     progress.value = audio.currentTime;
-    // }, 1000);
-    setTimeout(function updateProgress() {
-        progress.value = audio.currentTime;
-        setTimeout(updateProgress, 1000)
-    },1000)
+    progress.value = audio.currentTime;
+    setTimeout(updateProgress, 1000);
 }
 
 function updateTime() {
-    setTimeout(function time() {
-        $('#current-time').text(parseInt(audio.currentTime / 60) +
-            ':' + parseInt(audio.currentTime % 60));
-        setTimeout(time, 1000);
-    }, 0)
+    $('#current-time').text(parseInt(audio.currentTime / 60) +
+        ':' + parseInt(audio.currentTime % 60));
+    setTimeout(updateTime, 1000);
 }
 
 function fullTime() {

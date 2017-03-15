@@ -2,7 +2,7 @@ html, body {
     width:          100%;
     height:         100%;
     font-size:      16px;
-    color:          white;
+    color:          lightseagreen;
     font-weight:    100;
     font-family:    sans-serif, "Microsoft YaHei";
 }
@@ -186,6 +186,7 @@ p {
 }
 
 .panel-5 .channels {
+    position:       relative;
     width:          20px;
     height:         3px;
     box-sizing:     content-box;
@@ -195,8 +196,45 @@ p {
     background-color: gray;
     background-clip:content-box;
 }
+        .channel-list {
+            position:       absolute;
+            right:          0;
+            bottom:         20px;
+            width:          90px;
+            height:         200px;
+            overflow-x:     hidden;
+            overflow-y:     scroll;
+            display:        none;
+            background-color: #f7ffc6;
+            border-radius:  4px;
+        }
 
+        .channel-list::-webkit-scrollbar {
+            width:          5px;
+            height:         10px;
+        }
 
+        .channel-list::-webkit-scrollbar-button {
+            display:        none;
+        }
+
+        .channel-list::-webkit-scrollbar-thumb {
+            background-color: #ff00f1;
+            border-radius:  4px;
+        }
+
+        .channels li {
+            width:          80px;
+            height:         20px;
+            box-sizing:     content-box;
+            padding:        5px;
+            cursor:         pointer;
+            text-align:     center;
+        }
+        .channels li:hover {
+            transition:     .5s;
+            background-color: #ff5923;
+        }
 
 
 
