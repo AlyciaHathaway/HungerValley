@@ -39,6 +39,7 @@
 
 var songs = [];
 
+
 function getSong(channelID) {
     $.get('http://api.jirengu.com/fm/getSong.php', {
         channel: channelID
@@ -46,6 +47,7 @@ function getSong(channelID) {
         .done(function(songsStr) {
             var severSong = JSON.parse(songsStr).song[0];
             songs.push(severSong);
+            play(songs.length - 1);
         })
         .fail(function() {
             console.log('获取歌曲失败')
@@ -61,8 +63,8 @@ function getChannel() {
                 var channelsArr = JSON.parse(channelsStr).channels;
                 for (var i=0; i<channelsArr.length; i++) {
                     var channelName = channelsArr[i].name;
-                    var channelID = channelsArr[i].channel_id;
-                    var html = '<li channel-id=\"' + channelID + '\">' + channelName + '</li>';
+                    var channelAttr = channelsArr[i].channel_id;
+                    var html = '<li channel-id=\"' + channelAttr + '\">' + channelName + '</li>';
                     $('.channel-list').append(html);
                 }
                 $('.channels li').first().addClass('list-selected');
@@ -75,6 +77,7 @@ function getChannel() {
         })
 }
 
+
 $('.channels').click(getChannel);
 $('.channel-list').mouseleave(function() {
     $('.channel-list').css('display', 'none');
@@ -82,11 +85,17 @@ $('.channel-list').mouseleave(function() {
     channelLock = true;
 });
 
-$('.channels li').on('click', function() {
-    var id = $(this).first().attr('channel-id');
-    console.log(id);
-    getSong(id);
+$('.channels ul').on('click', 'li', function() {
+    audio.pause();
+    $(this).siblings().removeClass('list-selected');
+    $(this).addClass('list-selected');
+    var channelID = $(this).attr('channel-id');
+    getSong(channelID);
+    console.log(songs.length);
 });
+
+
+
 
 var audio = $('audio').get(0);
 var progress = $('progress').get(0);
@@ -94,36 +103,39 @@ var progress = $('progress').get(0);
 var current = 0;
 
 function play(n) {
-    getSong();
     if (n >= songs.length) {
-        n = 0
+        getSong()
     }
+
     if (n < 0) {
         n = songs.length - 1
     }
 
-    var song = songs[n];
-    audio.pause();
-    audio.src = song.url;
-    audio.play();
-    current = n;
+    if (n>0 && n<songs.length) {
+        var song = songs[n];
+        audio.pause();
+        audio.src = song.url;
+        audio.play();
+        current = n;
 
-    audio.addEventListener('playing', function() {
-        //value值初始化
-        progress.value = 0;
-        //duration音频的总长度
-        progress.max = audio.duration;
+        audio.addEventListener('playing', function() {
+            //value值初始化
+            progress.value = 0;
+            //duration音频的总长度
+            progress.max = audio.duration;
 
-        //进度条更新
-        updateProgress();
-        //时间更新
-        updateTime();
-        //总时长更新
-        fullTime();
-    });
-
-    $('.active').css('animation-play-state', 'running');
+            //进度条更新
+            updateProgress();
+            //时间更新
+            updateTime();
+            //总时长更新
+            fullTime();
+        });
+        $('')
+        $('.active').css('animation-play-state', 'running');
+    }
 }
+
 //【疑惑：递归的出口在哪里，这样写会不会爆栈？】
 function updateProgress() {
     progress.value = audio.currentTime;
@@ -153,7 +165,7 @@ $('#play').on('click', function() {
     if (progress.value !== 0) {
         audio.play()
     }else {
-        play(current)
+        play()
     }
 });
 
@@ -193,6 +205,7 @@ $('#next').on('click', function() {
     setTimeout(function() {
         $('#needle').addClass('needle-play');
     }, 400)
+
     play(current + 1)
 });
 
