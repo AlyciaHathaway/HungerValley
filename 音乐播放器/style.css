@@ -54,15 +54,19 @@ p {
 
 .panel-1 #title {
     float:          left;
-    width:          80px;
-    margin:         0 110px 0 10px;
+    width:          180px;
+    margin:         0 10px 0 10px;
     text-align:     center;
     line-height:    20px;
 }
 
         #title h3 {
+            height:             20px;
             font-size:          16px;
             font-weight:        600;
+            overflow:           hidden;
+            text-overflow:      ellipsis;
+            white-space:        nowrap;
         }
 
         #title p {

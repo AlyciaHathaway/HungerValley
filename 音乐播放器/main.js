@@ -139,6 +139,7 @@ function play(n) {
         });
         $('#title h3').text(songs[current].title);
         $('#title p').text(songs[current].artist);
+        $('#cover').css('background', 'url(' + songs[current].picture + ') no-repeat center center');
         $('.active').css('animation-play-state', 'running');
     }else {
         getSong()
