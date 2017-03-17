@@ -39,29 +39,32 @@
 
 var songs = [];
 
-
 function getSong(channelID) {
-    $.get('http://api.jirengu.com/fm/getSong.php', {
-        channel: channelID
-    })
-        .done(function(songsStr) {
-            var severSong = JSON.parse(songsStr).song[0];
-            songs.push(severSong);
-            play(songs.length - 1);
+    //只有解锁时才能发请求
+    if (theLock === false) {
+        $.get('http://api.jirengu.com/fm/getSong.php', {
+            channel: channelID
         })
-        .fail(function() {
-            console.log('获取歌曲失败')
-        })
+            .done(function(songsStr) {
+                var severSong = JSON.parse(songsStr).song[0];
+                songs.push(severSong);
+                play(songs.length - 1);
+            })
+            .fail(function() {
+                console.log('获取歌曲失败')
+            })
+    }
 }
 
 
-var channelLock = true;
+var theLock = false;
 function getChannel() {
-    $.get('http://api.jirengu.com/fm/getChannels.php')
-        .done(function(channelsStr) {
-            if(channelLock){
+    //只有解锁时才能发请求
+    if(theLock === false) {
+        $.get('http://api.jirengu.com/fm/getChannels.php')
+            .done(function (channelsStr) {
                 var channelsArr = JSON.parse(channelsStr).channels;
-                for (var i=0; i<channelsArr.length; i++) {
+                for (var i = 0; i < channelsArr.length; i++) {
                     var channelName = channelsArr[i].name;
                     var channelAttr = channelsArr[i].channel_id;
                     var html = '<li channel-id=\"' + channelAttr + '\">' + channelName + '</li>';
@@ -69,12 +72,13 @@ function getChannel() {
                 }
                 $('.channels li').first().addClass('list-selected');
                 $('.channel-list').css('display', 'block');
-                channelLock = false;
-            }
-        })
-        .fail(function() {
-            $('.channel-list').append('<li>获取失败</li>');
-        })
+                //请求一次后加锁
+                theLock = true;
+            })
+            .fail(function () {
+                $('.channel-list').append('<li>获取失败</li>');
+            })
+    }
 }
 
 
@@ -82,7 +86,7 @@ $('.channels').click(getChannel);
 $('.channel-list').mouseleave(function() {
     $('.channel-list').css('display', 'none');
     $('.channel-list').empty();
-    channelLock = true;
+    theLock = false;
 });
 
 $('.channels ul').on('click', 'li', function() {
@@ -111,7 +115,7 @@ function play(n) {
     //     n = songs.length - 1
     // }
 
-    if (n>0 && n<songs.length) {
+    if (n>=0 && n<songs.length) {
         var song = songs[n];
         audio.pause();
         audio.src = song.url;
@@ -130,9 +134,12 @@ function play(n) {
             updateTime();
             //总时长更新
             fullTime();
+            //只有当下一首开始播放时才能解锁
+            theLock = false;
         });
         $('#title h3').text(songs[current].title);
         $('#title p').text(songs[current].artist);
+        $('#cover').css('background', 'url(' + songs[current].picture + ') no-repeat center center');
         $('.active').css('animation-play-state', 'running');
     }else {
         getSong()
@@ -193,8 +200,9 @@ $('#prev').on('click', function() {
     $('#needle').removeClass('needle-play');
     setTimeout(function() {
         $('#needle').addClass('needle-play');
-    }, 400)
-    play(current - 1)
+    }, 400);
+    play(current - 1);
+    theLock = true;
 });
 
 $('#next').on('click', function() {
@@ -207,13 +215,13 @@ $('#next').on('click', function() {
     $('#needle').removeClass('needle-play');
     setTimeout(function() {
         $('#needle').addClass('needle-play');
-    }, 400)
-
-    play(current + 1)
+    }, 400);
+    play(current + 1);
+    theLock = true;
 });
 
 $('#loop').on('click', function() {
-    console.log('设置循环')
+    console.log('设置循环');
     audio.setAttribute('loop','loop')
-})
+});
 
