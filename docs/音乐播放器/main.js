@@ -71,7 +71,6 @@ function getChannel() {
                     $('.channel-list').append(html);
                 }
                 $('.channels li').first().addClass('list-selected');
-                $('.channel-list').css('display', 'block');
                 //请求一次后加锁
                 theLock = true;
             })
@@ -82,20 +81,43 @@ function getChannel() {
 }
 
 
-$('.channels').click(getChannel);
-$('.channel-list').mouseleave(function() {
-    $('.channel-list').css('display', 'none');
-    $('.channel-list').empty();
-    theLock = false;
+$('.channels').on('click', function() {
+    if ($('.channels ul').hasClass('channel-hide')) {
+        getChannel();
+        $('.channels ul').removeClass('channel-hide');
+        theLock = false;
+    }else {
+        $('.channels ul').addClass('channel-hide');
+        $('.channels ul').empty();
+        theLock = false;
+    }
 });
 
+
+//【疑惑】为什么需要点击两次才能发起getSong请求？
+//把它关了也要重新点两次发请求
+//【解决】一开始锁是开着的，但音乐数组没缓存，会发两次请求，第二次锁上了，所以要把theLock放到getSong前面
+//【事件冒泡】如果不阻止li冒泡，就会在每一次点击后，列表隐藏并清空
 $('.channels ul').on('click', 'li', function() {
     audio.pause();
     $(this).siblings().removeClass('list-selected');
     $(this).addClass('list-selected');
     var channelID = $(this).attr('channel-id');
+    event.stopPropagation();
+    theLock = false;
     getSong(channelID);
+    //图标切换
+    if ($('#pause').hasClass('icon-hide')) {
+        $('#play').addClass('icon-hide');
+        $('#pause').removeClass('icon-hide');
+    }
+    //唱针动画
+    $('#needle').removeClass('needle-play');
+    setTimeout(function() {
+        $('#needle').addClass('needle-play');
+    }, 400);
     console.log(songs.length);
+    console.log(channelID);
 });
 
 
@@ -105,6 +127,35 @@ var audio = $('audio').get(0);
 var progress = $('progress').get(0);
 //当前第几首
 var current = 0;
+
+//【疑惑：递归的出口在哪里，这样写会不会爆栈？】
+function updateProgress() {
+    progress.value = audio.currentTime;
+    setTimeout(updateProgress, 1000);
+}
+
+function updateTime() {
+    var minutes = parseInt(audio.currentTime / 60);
+    var seconds = parseInt(audio.currentTime % 60) + '';
+        seconds = seconds.length === 2 ? seconds : '0' + seconds;
+    $('#current-time').text(minutes + ':' + seconds);
+    setTimeout(updateTime, 1000);
+}
+
+function fullTime() {
+    var minutes = parseInt(audio.duration / 60);
+    var seconds = parseInt(audio.duration % 60) + '';
+    seconds = seconds.length === 2 ? seconds : '0' + seconds;
+    $('#full-time').text(minutes + ':' + seconds);
+}
+
+function timeLine() {
+    $('progress').on('click', function(e) {
+        var percent = e.offsetX / parseInt(getComputedStyle(this).width);
+        audio.currentTime = percent * audio.duration;
+        progress.value = audio.currentTime;
+    });
+}
 
 function play(n) {
     // if (n >= songs.length) {
@@ -134,9 +185,16 @@ function play(n) {
             updateTime();
             //总时长更新
             fullTime();
+            //时间轴可点击
+            timeLine();
             //只有当下一首开始播放时才能解锁
             theLock = false;
         });
+
+        audio.addEventListener('ended', function() {
+            play(current + 1);
+        });
+
         $('#title h3').text(songs[current].title);
         $('#title p').text(songs[current].artist);
         $('#cover').css('background', 'url(' + songs[current].picture + ') no-repeat center center');
@@ -146,70 +204,67 @@ function play(n) {
     }
 }
 
-//【疑惑：递归的出口在哪里，这样写会不会爆栈？】
-function updateProgress() {
-    progress.value = audio.currentTime;
-    setTimeout(updateProgress, 1000);
-}
 
-function updateTime() {
-    $('#current-time').text(parseInt(audio.currentTime / 60) +
-        ':' + parseInt(audio.currentTime % 60));
-    setTimeout(updateTime, 1000);
-}
 
-function fullTime() {
-    $('#full-time').text(parseInt(audio.duration / 60) +
-        ':' + parseInt(audio.duration % 60))
-}
 
 $('#play').on('click', function() {
     //图标切换
-    $(this).addClass('hide');
-    $(this).next('#pause').removeClass('hide');
+    $('#play').addClass('icon-hide');
+    $('#pause').removeClass('icon-hide');
     //唱针动画
     $('#needle').addClass('needle-play');
-    //唱片旋转
+    //黑胶旋转
     $('.active').css('animation-play-state', 'running');
     //暂停而不是停止
-    if (progress.value !== 0) {
+    if (progress.value > 0 && progress.value < progress.max) {
         audio.play()
-    }else {
-        play(songs.length - 1)
+    }
+    //先不考虑单曲循环问题，play的作用就是不断地播放下一首
+    if (progress.value === 0) {
+        play(current)
+    }
+    if (progress.value === progress.max && audio.getAttribute('loop') !== loop) {
+        play(current + 1)
+    }
+    //如果单曲循环
+    if (audio.getAttribute('loop') === loop) {
+        play(current)
     }
 });
 
 $('#pause').on('click', function() {
     //图标切换
-    $(this).addClass('hide');
-    $(this).prev('#play').removeClass('hide');
+    $('#play').removeClass('icon-hide');
+    $('#pause').addClass('icon-hide');
     //唱针动画
     $('#needle').removeClass('needle-play');
-    //唱片旋转
+    //黑胶旋转
     $('.active').css('animation-play-state', 'paused');
     audio.pause();
 });
 
 $('#prev').on('click', function() {
     //图标切换
-    if ($('#pause').hasClass('hide')) {
-        $('#play').addClass('hide');
-        $('#pause').removeClass('hide');
+    if ($('#pause').hasClass('icon-hide')) {
+        $('#play').addClass('icon-hide');
+        $('#pause').removeClass('icon-hide');
     }
     //唱针动画
     $('#needle').removeClass('needle-play');
     setTimeout(function() {
         $('#needle').addClass('needle-play');
     }, 400);
+    //黑胶动画
+
     play(current - 1);
     theLock = true;
 });
 
 $('#next').on('click', function() {
     //图标切换
-    if ($('#pause').hasClass('hide')) {
-        $('#play').addClass('hide');
-        $('#pause').removeClass('hide');
+    if ($('#pause').hasClass('icon-hide')) {
+        $('#play').addClass('icon-hide');
+        $('#pause').removeClass('icon-hide');
     }
     //唱针动画
     $('#needle').removeClass('needle-play');
