@@ -71,7 +71,6 @@ function getChannel() {
                     $('.channel-list').append(html);
                 }
                 $('.channels li').first().addClass('list-selected');
-                $('.channel-list').css('display', 'block');
                 //请求一次后加锁
                 theLock = true;
             })
@@ -82,20 +81,33 @@ function getChannel() {
 }
 
 
-$('.channels').click(getChannel);
-$('.channel-list').mouseleave(function() {
-    $('.channel-list').css('display', 'none');
-    $('.channel-list').empty();
-    theLock = false;
+$('.channels').on('click', function() {
+    if ($('.channels ul').hasClass('channel-hide')) {
+        getChannel();
+        $('.channels ul').removeClass('channel-hide');
+        theLock = false;
+    }else {
+        $('.channels ul').addClass('channel-hide');
+        $('.channels ul').empty();
+        theLock = false;
+    }
 });
 
+
+//【疑惑】为什么需要点击两次才能发起getSong请求？
+//把它关了也要重新点两次发请求
+//【解决】一开始锁是开着的，但音乐数组没缓存，会发两次请求，第二次锁上了，所以要把theLock放到getSong前面
+//【事件冒泡】如果不阻止li冒泡，就会在每一次点击后，列表隐藏并清空
 $('.channels ul').on('click', 'li', function() {
     audio.pause();
     $(this).siblings().removeClass('list-selected');
     $(this).addClass('list-selected');
     var channelID = $(this).attr('channel-id');
+    event.stopPropagation();
+    theLock = false;
     getSong(channelID);
     console.log(songs.length);
+    console.log(channelID);
 });
 
 

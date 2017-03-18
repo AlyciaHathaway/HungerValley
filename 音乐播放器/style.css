@@ -73,6 +73,9 @@ p {
             font-size:          12px;
             font-weight:        300;
             color:              #a2a2a2;
+            overflow:           hidden;
+            text-overflow:      ellipsis;
+            white-space:        nowrap;
         }
 
 .panel-1 #share {
@@ -200,6 +203,9 @@ p {
     background-color: gray;
     background-clip:content-box;
 }
+        .channel-hide {
+            display:        none;
+        }
         .channel-list {
             position:       absolute;
             right:          0;
@@ -208,7 +214,6 @@ p {
             height:         200px;
             overflow-x:     hidden;
             overflow-y:     scroll;
-            display:        none;
             background-color: #f7ffc6;
             border-radius:  4px;
         }
