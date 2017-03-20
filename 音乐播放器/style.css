@@ -13,6 +13,10 @@ html, body {
     box-sizing:     border-box;
 }
 
+.icon-hide {
+    display:        none;
+}
+
 p {
     color:          #3bc100;
     text-align:     center;
@@ -186,10 +190,6 @@ p {
     margin-top:     20px;
     display:        flex;
     justify-content:space-around;
-}
-
-.panel-5 .icon-hide {
-    display:        none;
 }
 
 .panel-5 .channels {

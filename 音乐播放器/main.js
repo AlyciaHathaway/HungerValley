@@ -275,30 +275,43 @@ $('#next').on('click', function() {
     theLock = true;
 });
 
-$('#loop').on('click', function() {
-    console.log('设置循环');
-    audio.setAttribute('loop','loop')
-});
-
-$('#like').on('click', function() {
-    var likeColor = $(this).attr('style');
-    if (likeColor === 'color: #eee') {
-        $(this).attr({
-            style: 'color: red'
-        });
+$('.loop-btn').on('click', function() {
+    //图标切换
+    if ($('#single').hasClass('icon-hide')) {
+        $('#loop').addClass('icon-hide');
+        $('#single').removeClass('icon-hide');
+        audio.setAttribute('loop','loop')
     }else {
-        $(this).attr({
-            style: 'color: #eee'
-        });
+        $('#loop').removeClass('icon-hide');
+        $('#single').addClass('icon-hide');
+        audio.removeAttribute('loop')
     }
 });
 
-$('a').on('click', function() {
-    $('a').attr({
+$('.like-btn').on('click', function() {
+    //图标切换
+    if ($('#like').hasClass('icon-hide')) {
+        $('#dislike').addClass('icon-hide');
+        $('#like').removeClass('icon-hide');
+    }else {
+        $('#dislike').removeClass('icon-hide');
+        $('#like').addClass('icon-hide');
+    }
+});
+
+$('#download').on('click', function() {
+    $(this).attr({
         href: songs[current].url,
         download: songs[current].title + '.mp3'
     });
-    console.log($(this).attr('href'))
-    console.log($(this).attr('download'))
-})
+});
+
+$('#share').on('click', function() {
+    $(this).attr({
+        href:'http://service.weibo.com/share/share.php?url='+
+        encodeURIComponent(location.href)+
+        '&title=hi,我分享了一首' +
+        songs[current].title
+    });
+});
 
