@@ -280,3 +280,16 @@ $('#loop').on('click', function() {
     audio.setAttribute('loop','loop')
 });
 
+$('#like').on('click', function() {
+    var likeColor = $(this).attr('style');
+    if (likeColor === 'color: #eee') {
+        $(this).attr({
+            style: 'color: red'
+        });
+    }else {
+        $(this).attr({
+            style: 'color: #eee'
+        });
+    }
+});
+
