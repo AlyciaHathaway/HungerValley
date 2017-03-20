@@ -293,3 +293,12 @@ $('#like').on('click', function() {
     }
 });
 
+$('a').on('click', function() {
+    $('a').attr({
+        href: songs[current].url,
+        download: songs[current].title + '.mp3'
+    });
+    console.log($(this).attr('href'))
+    console.log($(this).attr('download'))
+})
+
