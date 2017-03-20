@@ -21,11 +21,12 @@
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: 0.2px;
             -moz-osx-font-smoothing: grayscale;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <p>生命短暂，唯音乐和美酒不可辜负</p>
+    <p id="global">生命短暂，唯音乐和美酒不可辜负</p>
     <div class="layout">
         <div class="panel-1">
             <!--返回键-->
@@ -84,10 +85,10 @@
             <i id="pause" class="icon-hide icon-font">&#xe61f;</i>
             <i id="next" class="icon-font">&#xe620;</i>
             <!--频道栏-->
-            <div class="channels">
+            <i class="icon-font channels">
+                &#xe600;
                 <ul class="channel-list channel-hide"></ul>
-            </div>
-
+            </i>
         </div>
         <audio src=""></audio>
     </div>
