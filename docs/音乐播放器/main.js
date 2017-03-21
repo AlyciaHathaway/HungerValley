@@ -275,8 +275,43 @@ $('#next').on('click', function() {
     theLock = true;
 });
 
-$('#loop').on('click', function() {
-    console.log('设置循环');
-    audio.setAttribute('loop','loop')
+$('.loop-btn').on('click', function() {
+    //图标切换
+    if ($('#single').hasClass('icon-hide')) {
+        $('#loop').addClass('icon-hide');
+        $('#single').removeClass('icon-hide');
+        audio.setAttribute('loop','loop')
+    }else {
+        $('#loop').removeClass('icon-hide');
+        $('#single').addClass('icon-hide');
+        audio.removeAttribute('loop')
+    }
+});
+
+$('.like-btn').on('click', function() {
+    //图标切换
+    if ($('#like').hasClass('icon-hide')) {
+        $('#dislike').addClass('icon-hide');
+        $('#like').removeClass('icon-hide');
+    }else {
+        $('#dislike').removeClass('icon-hide');
+        $('#like').addClass('icon-hide');
+    }
+});
+
+$('#download').on('click', function() {
+    $(this).attr({
+        href: songs[current].url,
+        download: songs[current].title + '.mp3'
+    });
+});
+
+$('#share').on('click', function() {
+    $(this).attr({
+        href:'http://service.weibo.com/share/share.php?url='+
+        encodeURIComponent(location.href)+
+        '&title=hi,我分享了一首' +
+        songs[current].title
+    });
 });
 

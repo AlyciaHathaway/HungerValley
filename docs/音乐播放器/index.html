@@ -16,29 +16,28 @@
 
         .icon-font {
             font-family:"iconfont" !important;
-            font-size:30px;
+            font-size:28px;
             font-style:normal;
-            color:#eee;
-            cursor:pointer;
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: 0.2px;
             -moz-osx-font-smoothing: grayscale;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <p>生命短暂，唯音乐和美酒不可辜负</p>
+    <p id="global">生命短暂，唯音乐和美酒不可辜负</p>
     <div class="layout">
         <div class="panel-1">
             <!--返回键-->
-            <i id="back" class="icon-font">&#xe607;</i>
+            <i id="back" class="icon-font">&#xe604;</i>
             <!--标题栏-->
             <div id="title">
                 <h3>飞鸟和她</h3>
                 <p>v不才v</p>
             </div>
             <!--分享按钮-->
-            <i id="share" class="icon-font">&#xe62e;</i>
+            <a id="share" target="_blank"><i class="icon-font">&#xe60a;</i></a>
         </div>
 
         <div class="panel-2">
@@ -53,13 +52,18 @@
 
         <div class="panel-3">
             <!--喜欢-->
-            <i id="like" class="icon-font">&#xe63d;</i>
+            <div class="like-btn">
+                <i id="dislike" class="icon-font" style="font-size:24px">&#xe73f;</i>
+                <i id="like" class="icon-hide icon-font" style="color:red;font-size:24px">&#xe79f;</i>
+            </div>
             <!--下载-->
-            <i id="download" class="icon-font">&#xe62f;</i>
+            <a id="download">
+                <i class="icon-font">&#xe62f;</i>
+            </a>
             <!--评论-->
-            <i id="comment" class="icon-font">&#xe605;</i>
+            <i id="comment" class="icon-font">&#xe60b;</i>
             <!--歌词显示-->
-            <i id="lyric-btn" class="icon-font">&#xe61e;</i>
+            <i id="lyric-btn" class="icon-font" style="font-size:30px">&#xe6de;</i>
         </div>
 
         <div class="panel-4">
@@ -71,17 +75,20 @@
 
         <div class="panel-5">
             <!--循环控制-->
-            <i id="loop" class="icon-font">&#xe600;</i>
-            <!--播放控制-->
-            <i id="prev" class="icon-font">&#xe64d;</i>
-            <i id="play" class="icon-font">&#xf0013;</i>
-            <i id="pause" class="icon-hide icon-font">&#xe696;</i>
-            <i id="next" class="icon-font">&#xe64c;</i>
-            <!--频道栏-->
-            <div class="channels">
-                <ul class="channel-list channel-hide"></ul>
+            <div class="loop-btn">
+                <i id="loop" class="icon-font">&#xe601;</i>
+                <i id="single" class="icon-hide icon-font">&#xe6f3;</i>
             </div>
-
+            <!--播放控制-->
+            <i id="prev" class="icon-font">&#xe61e;</i>
+            <i id="play" class="icon-font">&#xf0013;</i>
+            <i id="pause" class="icon-hide icon-font">&#xe61f;</i>
+            <i id="next" class="icon-font">&#xe620;</i>
+            <!--频道栏-->
+            <i class="icon-font channels">
+                &#xe600;
+                <ul class="channel-list channel-hide"></ul>
+            </i>
         </div>
         <audio src=""></audio>
     </div>
