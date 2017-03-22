@@ -82,7 +82,7 @@ header .skill-tree {
 header .contacts {
 			display:			inline-block;
 			text-align:			left;
-			margin:				430px auto 60px;
+			margin:				492px auto 60px;
 			color:				#fff;
 		}
 		.contacts ul {
@@ -133,14 +133,21 @@ header .contacts {
 		}
 
 				.description .title {
+					display:			flex;
+					justify-content:	space-between;
 					line-height:		1;
 					padding-bottom:		10px;
 					font-size:			18px;
 					color:				#22C3AA;
 				}
+				
+				.description .title a {
+					/*margin-right:		300px;*/
+				}
+
+
 				.description .title span {
 					display:			inline-block;
-					float:				right;
 					margin-top:			-10px;
 					padding:			5px 10px;
 					margin-left:		10px;
